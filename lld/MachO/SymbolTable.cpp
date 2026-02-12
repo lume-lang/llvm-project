@@ -411,6 +411,8 @@ static void handleSegmentBoundarySymbol(const Undefined &sym, StringRef segName,
 static bool recoverFromUndefinedSymbol(const Undefined &sym) {
   // Handle start/end symbols.
   StringRef name = sym.getName();
+  name.consume_front("_");
+
   if (name.consume_front("section$start$")) {
     handleSectionBoundarySymbol(sym, name, Boundary::Start);
     return true;
@@ -429,7 +431,7 @@ static bool recoverFromUndefinedSymbol(const Undefined &sym) {
   }
 
   // Leave dtrace symbols, since we will handle them when we do the relocation
-  if (name.starts_with("___dtrace_"))
+  if (name.starts_with("__dtrace_"))
     return true;
 
   // Handle -U.
