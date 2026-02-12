@@ -49,9 +49,9 @@ jobs:
           name: container
           path: ${{ steps.vars.outputs.container-filename }}
           retention-days: 14
-  
+
   push-ci-container:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.repository_owner == 'llvm'
     needs:
       - build-ci-container-windows
     permissions:

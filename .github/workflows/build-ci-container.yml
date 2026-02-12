@@ -52,7 +52,7 @@ jobs:
           test-command: ${{ matrix.test-command }}
 
   push-ci-container:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.repository_owner == 'llvm'
     needs:
       - build-ci-container
     permissions:

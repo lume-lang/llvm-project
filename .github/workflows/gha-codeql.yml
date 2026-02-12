@@ -9,8 +9,6 @@ on:
       - main
     paths:
       - '.github/**'
-  schedule:
-    - cron: '30 0 * * *'
 
 concurrency:
   group: ${{ github.workflow }}
